@@ -24,7 +24,7 @@ date: 2019-5-9 12:10
 
 + 前后端分离
 + 前端vue，后台springboot ，http通信
-+ 数据库采用mysql
++ 数据库采用mysql 
 + 通信内容采用json
 
 # 项目分析
