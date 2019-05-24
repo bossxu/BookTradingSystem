@@ -1,18 +1,8 @@
-package com.booktrading.demo.Model;
+package com.booktrading.demo.Dto;
 
+import com.booktrading.demo.Model.Book;
 
-import com.booktrading.demo.Dto.BookDto;
-import lombok.Data;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-public class Book {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookDto {
     private int bookid;
     private float cost;
     private float normalcost;
@@ -20,13 +10,7 @@ public class Book {
     private String description;
     private boolean soldenable;
     private String image;
-
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToMany(mappedBy = "bookList",fetch = FetchType.LAZY)
-    private List<Tag> tagList;
+    private int solder;
 
     public int getBookid() {
         return bookid;
@@ -84,40 +68,20 @@ public class Book {
         this.image = image;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Tag> getTagList() {
-        return tagList;
-    }
-
-    public void setTagList(List<Tag> tagList) {
-        this.tagList = tagList;
-    }
-
-    public Book()
+    public BookDto()
     {
         this.bookid = 0;
         this.soldenable = false;
-        this.tagList = new ArrayList<>();
     }
-
-    public Book(BookDto bookDto)
+    public BookDto(Book book)
     {
-        this.bookid = 0;
-        this.soldenable = false;
-        this.tagList = new ArrayList<>();
-
-        this.cost = bookDto.getCost();
-        this.description = bookDto.getDescription();
-        this.image = bookDto.getImage();
-        this.normalcost = bookDto.getNormalcost();
-        this.title = bookDto.getTitle();
-
+        this.soldenable = book.isSoldenable();
+        this.bookid = book.getBookid();
+        this.cost = book.getCost();
+        this.description = book.getDescription();
+        this.normalcost = book.getNormalcost();
+        this.image = book.getImage();
+        this.title = book.getTitle();
+        this.solder = book.getUser().getUserid();
     }
 }
