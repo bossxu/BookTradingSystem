@@ -26,7 +26,7 @@ public class AddressControl {
     }
 
     @PostMapping("/create")
-    public String Addadress(Addressdto addressdto)
+    public String Addadress(@RequestBody Addressdto addressdto)
     {
         return addressService.addAddress(addressdto);
     }

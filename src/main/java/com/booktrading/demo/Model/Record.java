@@ -112,14 +112,14 @@ public class Record {
     @Override
     public String toString() {
         return "{" +
-                "reid=" + reid +
-                ", bookid=" + bookid +
-                ", address='" + address + '\'' +
-                ", bookcost=" + bookcost +
-                ", forsure=" + forsure +
-                ", date='" + date + '\'' +
-                ", buyer='" + user.getUsername() + '\'' +
-                ", date='" + date + '\'' +
+                "reid:" + reid +
+                ", bookid:" + bookid +
+                ", address:'" + address + '\'' +
+                ", bookcost:" + bookcost +
+                ", forsure:" + forsure +
+                ", date:'" + date + '\'' +
+                ", buyer:'" + user.getUsername() + '\'' +
+                ", date:'" + date + '\'' +
                 '}';
     }
 }

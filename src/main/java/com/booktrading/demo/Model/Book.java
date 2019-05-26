@@ -131,14 +131,14 @@ public class Book {
     @Override
     public String toString() {
         return "{" +
-                "bookid=" + bookid +
-                ", cost=" + cost +
-                ", normalcost=" + normalcost +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", user='" + user.getUsername() + '\'' +
-                ", soldenable=" + soldenable +
-                ", image='" + image + '\'' +
+                "bookid:" + bookid +
+                ", cost:" + cost +
+                ", normalcost:" + normalcost +
+                ", title:'" + title + '\'' +
+                ", description:'" + description + '\'' +
+                ", user:'" + user.getUsername() + '\'' +
+                ", soldenable:" + soldenable +
+                ", image:'" + image + '\'' +
                 '}';
     }
 }

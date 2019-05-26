@@ -4,15 +4,15 @@ import lombok.Data;
 
 public class QueryDto {
 
-    String usernmae;
+    String username;
     String password;
 
-    public String getUsernmae() {
-        return usernmae;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsernmae(String usernmae) {
-        this.usernmae = usernmae;
+    public void setUsername(String usernmae) {
+        this.username = usernmae;
     }
 
     public String getPassword() {

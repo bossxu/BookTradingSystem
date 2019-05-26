@@ -43,22 +43,24 @@ public class BookServiceImpl implements BookService {
         User user = userReponsitory.findById(bookDto.getSolder()).get();
         Book book = new Book(bookDto);
         Iterator<String> it = bookDto.getTaglist().listIterator();
+        book.setUser(user);
+        bookReponsitory.save(book);
         while(it.hasNext())
         {
             String tagname = it.next();
             if(tagReponsitory.existsByTagname(tagname))
             {
-                book.addTag(tagReponsitory.findByTagname(tagname));
+               Tag tag = tagReponsitory.findByTagname(tagname);
+               tag.addBook(book);
+               tagReponsitory.save(tag);
             }
             else
             {
                 Tag tag = new Tag(tagname);
+                tag.addBook(book);
                 tagReponsitory.save(tag);
-                book.addTag(tag);
             }
         }
-        book.setUser(user);
-        bookReponsitory.save(book);
         return "{\"state\":\"success\"}";
     }
 

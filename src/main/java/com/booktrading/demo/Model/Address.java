@@ -1,6 +1,7 @@
 package com.booktrading.demo.Model;
 
 import com.booktrading.demo.Dto.Addressdto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class Address {
     private String zipcode;
     private String addressdetail;
 
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "user_id")
     private User user;
@@ -56,5 +58,15 @@ public class Address {
         this.zipcode = addressdto.getZipcode();
         this.addid = 0;
         this.addressdetail = addressdto.getAddressdetail();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "addid:" + addid +
+                ", zipcode:'" + zipcode + '\'' +
+                ", addressdetail:'" + addressdetail + '\'' +
+                ", user:" + user.getName() +
+                '}';
     }
 }

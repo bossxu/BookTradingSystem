@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
-
+import org.json.JSONObject;
 @RestController
 @RequestMapping("/api/user")
 @EnableAutoConfiguration
@@ -31,8 +31,8 @@ public class UserControl {
     }
 
     @PostMapping("/login")
-    public Map<String, String> LoginCheck(@RequestBody QueryDto queryDto) {
-        return userService.Userlogin(queryDto);
+    public Map<String,Object> LoginCheck(@RequestBody QueryDto queryDto) {
+       return userService.Userlogin(queryDto);
     }
 
     @GetMapping("/authority/{id}")

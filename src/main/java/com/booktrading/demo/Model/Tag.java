@@ -22,6 +22,11 @@ public class Tag {
     @JoinTable(name = "book_tag",joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Book> bookList;
 
+    public void addBook(Book book)
+    {
+        this.bookList.add(book);
+    }
+
     public int getTagid() {
         return tagid;
     }
@@ -69,8 +74,8 @@ public class Tag {
     @Override
     public String toString() {
         return "{" +
-                "tagid=" + tagid +
-                ", tagname='" + tagname + '\'' +
+                "tagid:" + tagid +
+                ", tagname:'" + tagname + '\'' +
                 '}';
     }
 }

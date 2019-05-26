@@ -178,17 +178,17 @@ public class User {
         this.sex = userdto.getSex();
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "userid=" + userid +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", sex='" + sex + '\'' +
-                ", name='" + name + '\'' +
-                ", authority='" + authority + '\'' +
-                ", money=" + money +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "\"userid:\"" + userid +
+//                ", username:'" + username + '\'' +
+//                ", password:'" + password + '\'' +
+//                ", phone:'" + phone + '\'' +
+//                ", sex:'" + sex + '\'' +
+//                ", name:'" + name + '\'' +
+//                ", authority:'" + authority + '\'' +
+//                ", money:" + money +
+//                '}';
+//    }
 }

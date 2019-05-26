@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String CreateUser(Userdto userdto) {
         User presion = new User(userdto);
-        if (Userexists(userdto.getName()))
+        if (Userexists(userdto.getUsername()))
         {
            return "{\"state\":\"error\",\"message\":\"用户已存在\"}";
         }
@@ -59,18 +59,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String,String> Userlogin(QueryDto queryDto) {
-        Map<String,String> response = new HashMap<>();
-        if(Userexists(queryDto.getUsernmae()))
+    public Map<String,Object> Userlogin(QueryDto queryDto) {
+        Map<String,Object> response = new HashMap<>();
+        if(!Userexists(queryDto.getUsername()))
         {
             response.put("state","error");
             response.put("response","用户名不存在");
             return response;
         }
-        if(UserGetbyUsername(queryDto.getUsernmae()).getPassword().equals(queryDto.getPassword()))
+        if(UserGetbyUsername(queryDto.getUsername()).getPassword().equals(queryDto.getPassword()))
         {
             response.put("state","success");
-            response.put("response",UserGetbyUsername(queryDto.getUsernmae()).toString());
+            response.put("response",UserGetbyUsername(queryDto.getUsername()));
             return response;
         }
         response.put("state","error");

@@ -25,7 +25,7 @@ public interface UserService {
 
     public boolean Userexists(String username);
 
-    public Map<String,String> Userlogin(QueryDto queryDto);
+    public Map<String,Object> Userlogin(QueryDto queryDto);
 
     public User UserGetbyUsername(String username);
 

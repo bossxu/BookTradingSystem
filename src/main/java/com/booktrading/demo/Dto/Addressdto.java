@@ -41,10 +41,7 @@ public class Addressdto {
         this.userid = userid;
     }
 
-    public Addressdto()
-    {
-
-    }
+    public Addressdto(){}
     public Addressdto(Address address)
     {
         this.addid = address.getAddid();
