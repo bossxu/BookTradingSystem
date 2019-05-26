@@ -2,6 +2,8 @@ package com.booktrading.demo.Controller;
 
 
 import com.booktrading.demo.Dto.BookDto;
+import com.booktrading.demo.Dto.BookQueryDto;
+import com.booktrading.demo.Dto.BookdetailDto;
 import com.booktrading.demo.Model.Book;
 import com.booktrading.demo.Service.BookService;
 import com.booktrading.demo.Service.TagService;
@@ -14,6 +16,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @EnableAutoConfiguration
@@ -31,6 +34,12 @@ public class BookControl {
     public List<Book> Getallbooks()
     {
         return bookService.GetallBook();
+    }
+
+    @GetMapping("/{id}")
+    public BookdetailDto GetBookdetail(@PathVariable int id)
+    {
+        return new BookdetailDto(bookService.getbookdetail(id));
     }
 
     @PostMapping("/create")
@@ -51,4 +60,9 @@ public class BookControl {
         return userService.GetAllbooksbuy(id);
     }
 
+    @GetMapping("/search")
+    public List<Book> Getbooksbusearch(@RequestBody BookQueryDto bookQueryDto)
+    {
+        return bookService.GetBooksbuSearch(bookQueryDto);
+    }
 }

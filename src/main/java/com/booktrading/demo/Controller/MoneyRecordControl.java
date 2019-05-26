@@ -20,13 +20,13 @@ public class MoneyRecordControl {
     MoneyRecordServiceImpl moneyRecordService;
 
     @GetMapping(value = "/{id}")
-    public List<MoneyRecord> GetMoneyRecordbyuserid(@PathVariable int userid)
+    public List<MoneyRecord> GetMoneyRecordbyuserid(@PathVariable int id)
     {
-        return moneyRecordService.GetMoneyRecordsbyUerid(userid);
+        return moneyRecordService.GetMoneyRecordsbyUerid(id);
     }
 
     @PostMapping(value = "/create")
-    public String CreateNewRecord(MoneyRecordDto moneyRecordDto)
+    public String CreateNewRecord(@RequestBody MoneyRecordDto moneyRecordDto)
     {
         return moneyRecordService.CreateNewMoneyRecord(moneyRecordDto);
     }

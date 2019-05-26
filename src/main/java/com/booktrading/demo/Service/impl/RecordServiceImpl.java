@@ -11,6 +11,8 @@ import com.booktrading.demo.Service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class RecordServiceImpl implements RecordService {
 
@@ -35,26 +37,34 @@ public class RecordServiceImpl implements RecordService {
         {
             return "{\"state\":\"error\",\"info\":\"不能买自己的书\"}";
         }
-        if(solder.getMoney() < book.getCost())
+        if(buyer.getMoney() < book.getCost())
         {
             return "{\"state\":\"error\",\"info\":\"钱不够啊\"}";
         }
-        solder.setMoney(solder.getMoney()-book.getCost());
+        buyer.setMoney(buyer.getMoney()-book.getCost());
         record.setUser(buyer);
-        record.setUser(solder);
+        record.setSolder(solder);
         book.setSoldenable(true);
+        book.setTagList(new ArrayList<>());
+        userReponsitory.save(buyer);
         recordReponsitory.save(record);
         bookReponsitory.save(book);
-        userReponsitory.save(solder);
         return "{\"state\":\"success\"}";
     }
 
     public String RecordForsure(RecordDto recordDto)
     {
-        User buyer = userReponsitory.findById(recordDto.getBuyid()).get();
+        User buyer = userReponsitory.findById(recordDto.getSolderid()).get();
         Book book = bookReponsitory.findById(recordDto.getBookid()).get();
+        Record record = recordReponsitory.findById(recordDto.getReid()).get();
+        if(record.isForsure())
+        {
+            return "{\"state\":\"error\",\"response\":\"已经确认过订单了\"}";
+        }
         buyer.setMoney(buyer.getMoney()+book.getCost());
-
+        userReponsitory.save(buyer);
+        record.setForsure(true);
+        recordReponsitory.save(record);
         return "{\"state\":\"success\"}";
     }
 }

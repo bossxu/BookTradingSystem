@@ -37,7 +37,7 @@ public class MoneyRecordServiceImpl implements MoneyRecordService {
     @Override
     public List<MoneyRecord> GetMoneyRecordsbyUerid(int userid) {
         List<MoneyRecord> moneyRecordList = new ArrayList<>();
-        Iterator<MoneyRecord> it = moneyRecordReponsitory.findAllByUser(userid).iterator();
+        Iterator<MoneyRecord> it = moneyRecordReponsitory.findAllByUser(userReponsitory.findById(userid).get()).iterator();
         while(it.hasNext())
         {
             moneyRecordList.add(it.next());
@@ -47,12 +47,12 @@ public class MoneyRecordServiceImpl implements MoneyRecordService {
 
     @Override
     public String CreateNewMoneyRecord(MoneyRecordDto moneyRecordDto) {
-        MoneyRecord moneyRecord = new MoneyRecord();
-        moneyRecordReponsitory.save(moneyRecord);
+        MoneyRecord moneyRecord = new MoneyRecord(moneyRecordDto);
         User user = userReponsitory.findByUsername(moneyRecordDto.getUsername());
         user.setMoney(user.getMoney()+moneyRecordDto.getMoney());
-        user.addMoneyRecord(moneyRecord);
         userReponsitory.save(user);
+        moneyRecord.setUser(user);
+        moneyRecordReponsitory.save(moneyRecord);
         return "{\"state\":\"success\"}";
     }
 

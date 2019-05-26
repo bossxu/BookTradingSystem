@@ -1,6 +1,7 @@
 package com.booktrading.demo.Model;
 
 import com.booktrading.demo.Dto.MoneyRecordDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.org.glassfish.gmbal.ManagedAttribute;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class MoneyRecord {
     private double money;
     private String date;
 
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "user_id")
     private User user;

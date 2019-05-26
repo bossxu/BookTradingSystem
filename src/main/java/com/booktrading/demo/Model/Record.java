@@ -2,6 +2,9 @@ package com.booktrading.demo.Model;
 
 
 import com.booktrading.demo.Dto.RecordDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,11 +24,12 @@ public class Record {
     private boolean forsure;
     private String date;
 
-
+    @JsonIgnoreProperties({"authority","money","username"})
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnoreProperties({"authority","money","username"})
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "sold_id")
     private User solder;

@@ -4,6 +4,7 @@ import com.booktrading.demo.Dao.BookReponsitory;
 import com.booktrading.demo.Dao.TagReponsitory;
 import com.booktrading.demo.Dao.UserReponsitory;
 import com.booktrading.demo.Dto.BookDto;
+import com.booktrading.demo.Dto.BookQueryDto;
 import com.booktrading.demo.Model.Book;
 import com.booktrading.demo.Model.Tag;
 import com.booktrading.demo.Model.User;
@@ -11,9 +12,7 @@ import com.booktrading.demo.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -64,4 +63,31 @@ public class BookServiceImpl implements BookService {
         return "{\"state\":\"success\"}";
     }
 
+    @Override
+    public List<Book> GetBooksbuSearch(BookQueryDto bookQueryDto) {
+        Set<Integer> a = new TreeSet<>();
+        List<Book> tagbooks = tagReponsitory.findByTagname(bookQueryDto.getTagname()).getBookList();
+        List<Book> keywordbooks = bookReponsitory.GetboosBykeyword(bookQueryDto.getKeyword());
+        Iterator<Book> it = tagbooks.listIterator();
+        List<Book> response = new ArrayList<>();
+        while(it.hasNext())
+        {
+            a.add(it.next().getBookid());
+        }
+        it = keywordbooks.listIterator();
+        while(it.hasNext())
+        {
+            Book book = it.next();
+            if(a.contains(book.getBookid()) && !book.isSoldenable())
+            {
+                response.add(book);
+            }
+        }
+        return response;
+    }
+
+    @Override
+    public Book getbookdetail(int id) {
+        return bookReponsitory.findById(id).get();
+    }
 }
