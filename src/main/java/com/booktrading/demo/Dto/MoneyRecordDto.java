@@ -6,7 +6,7 @@ public class MoneyRecordDto {
 
     private int id;
     private String date;
-    private double money;
+    private double money = 0;
     private String username;
     private String behavior;
 

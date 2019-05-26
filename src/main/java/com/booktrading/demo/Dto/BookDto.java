@@ -2,15 +2,34 @@ package com.booktrading.demo.Dto;
 
 import com.booktrading.demo.Model.Book;
 
+import java.util.List;
+
 public class BookDto {
     private int bookid;
     private float cost;
     private float normalcost;
     private String title;
     private String description;
-    private boolean soldenable;
     private String image;
     private int solder;
+    private List<String> taglist;
+
+
+    public int getSolder() {
+        return solder;
+    }
+
+    public void setSolder(int solder) {
+        this.solder = solder;
+    }
+
+    public List<String> getTaglist() {
+        return taglist;
+    }
+
+    public void setTaglist(List<String> taglist) {
+        this.taglist = taglist;
+    }
 
     public int getBookid() {
         return bookid;
@@ -52,13 +71,6 @@ public class BookDto {
         this.description = description;
     }
 
-    public boolean isSoldenable() {
-        return soldenable;
-    }
-
-    public void setSoldenable(boolean soldenable) {
-        this.soldenable = soldenable;
-    }
 
     public String getImage() {
         return image;
@@ -71,11 +83,9 @@ public class BookDto {
     public BookDto()
     {
         this.bookid = 0;
-        this.soldenable = false;
     }
     public BookDto(Book book)
     {
-        this.soldenable = book.isSoldenable();
         this.bookid = book.getBookid();
         this.cost = book.getCost();
         this.description = book.getDescription();

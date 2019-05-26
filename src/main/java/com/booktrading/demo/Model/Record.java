@@ -1,9 +1,12 @@
 package com.booktrading.demo.Model;
 
 
+import com.booktrading.demo.Dto.RecordDto;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Record {
@@ -15,7 +18,9 @@ public class Record {
     private int bookid;
     private String address;
     private double bookcost;
+    private boolean forsure;
     private String date;
+
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "user_id")
@@ -81,4 +86,40 @@ public class Record {
         this.solder = solder;
     }
 
+    public boolean isForsure() {
+        return forsure;
+    }
+
+    public void setForsure(boolean forsure) {
+        this.forsure = forsure;
+    }
+
+    public Record(){
+        this.reid = 0;
+    }
+    public Record(RecordDto recordDto)
+    {
+        this.reid = 0;
+        this.forsure = false;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.date = df.format(new Date());
+
+        this.address = recordDto.getAddress();
+        this.bookcost = recordDto.getBookcost();
+        this.bookid = recordDto.getBookid();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "reid=" + reid +
+                ", bookid=" + bookid +
+                ", address='" + address + '\'' +
+                ", bookcost=" + bookcost +
+                ", forsure=" + forsure +
+                ", date='" + date + '\'' +
+                ", buyer='" + user.getUsername() + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

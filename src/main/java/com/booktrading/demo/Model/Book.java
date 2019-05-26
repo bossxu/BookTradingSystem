@@ -2,6 +2,7 @@ package com.booktrading.demo.Model;
 
 
 import com.booktrading.demo.Dto.BookDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,10 +22,12 @@ public class Book {
     private boolean soldenable;
     private String image;
 
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "bookList",fetch = FetchType.LAZY)
     private List<Tag> tagList;
 
@@ -119,5 +122,23 @@ public class Book {
         this.normalcost = bookDto.getNormalcost();
         this.title = bookDto.getTitle();
 
+    }
+
+    public void addTag(Tag tag)
+    {
+        this.tagList.add(tag);
+    }
+    @Override
+    public String toString() {
+        return "{" +
+                "bookid=" + bookid +
+                ", cost=" + cost +
+                ", normalcost=" + normalcost +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", user='" + user.getUsername() + '\'' +
+                ", soldenable=" + soldenable +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

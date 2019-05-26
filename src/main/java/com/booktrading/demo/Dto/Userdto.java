@@ -5,11 +5,20 @@ import com.booktrading.demo.Model.User;
 public class Userdto {
     private int userid;
     private String authority;
+    private String username;
     private double money;
     private String name;
     private String password;
     private String phone;
     private String sex;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getAuthority() {
         return authority;

@@ -1,5 +1,6 @@
 package com.booktrading.demo.Model;
 
+import com.booktrading.demo.Dto.Addressdto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -46,5 +47,14 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Address(){addid = 0;}
+
+    public Address(Addressdto addressdto)
+    {
+        this.zipcode = addressdto.getZipcode();
+        this.addid = 0;
+        this.addressdetail = addressdto.getAddressdetail();
     }
 }

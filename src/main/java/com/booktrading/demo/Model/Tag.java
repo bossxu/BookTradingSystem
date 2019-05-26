@@ -48,6 +48,7 @@ public class Tag {
 
     public Tag()
     {
+        this.tagid = 0;
         this.bookList = new ArrayList<>();
     }
 
@@ -56,5 +57,20 @@ public class Tag {
         this.tagid = 0;
         this.tagname = tagDto.getTagname();
         this.bookList = new ArrayList<>();
+    }
+
+    public Tag(String tagname)
+    {
+        this.tagid = 0;
+        this.tagname =  tagname;
+        this.bookList = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "tagid=" + tagid +
+                ", tagname='" + tagname + '\'' +
+                '}';
     }
 }

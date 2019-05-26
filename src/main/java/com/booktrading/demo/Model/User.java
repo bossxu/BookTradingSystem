@@ -147,6 +147,11 @@ public class User {
         this.bookList = bookList;
     }
 
+    public void addMoneyRecord(MoneyRecord moneyRecord)
+    {
+        this.moneyRecordList.add(moneyRecord);
+    }
+
     public User(){
         userid = 0;
         this.addresseslist = new ArrayList<>();
@@ -167,9 +172,23 @@ public class User {
         this.recordList = new ArrayList<>();
 
         this.name = userdto.getName();
-        this.username = userdto.getName();
+        this.username = userdto.getUsername();
         this.password = userdto.getPassword();
         this.phone = userdto.getPhone();
         this.sex = userdto.getSex();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", sex='" + sex + '\'' +
+                ", name='" + name + '\'' +
+                ", authority='" + authority + '\'' +
+                ", money=" + money +
+                '}';
     }
 }
