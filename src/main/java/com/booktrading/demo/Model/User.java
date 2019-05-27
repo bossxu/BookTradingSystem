@@ -44,6 +44,10 @@ public class User {
     @OneToMany(mappedBy = "solder",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     private List<Record> recordAssolderList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<ShopingRecord> shopingRecordList;
+
     public List<Record> getRecordList() {
         return recordList;
     }
@@ -151,6 +155,14 @@ public class User {
     public void addMoneyRecord(MoneyRecord moneyRecord)
     {
         this.moneyRecordList.add(moneyRecord);
+    }
+
+    public List<ShopingRecord> getShopingRecordList() {
+        return shopingRecordList;
+    }
+
+    public void setShopingRecordList(List<ShopingRecord> shopingRecordList) {
+        this.shopingRecordList = shopingRecordList;
     }
 
     public User(){

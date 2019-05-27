@@ -31,6 +31,10 @@ public class Book {
     @ManyToMany(mappedBy = "bookList",fetch = FetchType.LAZY)
     private List<Tag> tagList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "book",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<ShopingRecord> shopingRecordList;
+
     public int getBookid() {
         return bookid;
     }
