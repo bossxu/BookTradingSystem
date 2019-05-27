@@ -343,3 +343,454 @@ api:
 
 + 所有用户的购买记录
 + 充钱
+
+
+## 具体的接口和通信规则
+
+### user
+
+#### 注册
+api: **/api/user/regist**
+
+```
+postbody
+{
+	"username":"langman2",
+	"name":"迪迦奥特曼",
+	"password":"password",
+	"phone":"10086",
+	"sex":"男"
+}
+response
+{"state":"success"}
+or
+{"state":"error","message":"用户已存在"}
+
+```
+
+#### 登陆
+api:**/api/user/login**
+```
+postbody:
+{
+	"username":"langman3",
+	"password":"password"
+}
+response:
+{
+    "response": {
+        "userid": 3,
+        "username": "langman3",
+        "phone": "10086",
+        "sex": "男",
+        "name": "赛文奥特曼",
+        "authority": "ROLE",
+        "money": 0
+    },
+    "state": "success"
+}
+{
+    "reponse": "密码错误",
+    "state": "error"
+}
+{
+    "response": "用户名不存在",
+    "state": "error"
+}
+```
+
+#### 获取某人的权限
+api:**/api/user/authority/{id}**
+```
+get:
+response:[String]
+ROLE or Admin
+```
+
+#### 改密码
+api:**/api/user/changepassword**
+```
+postbody:
+{
+	"userid":3,
+	"password":"password1"
+}
+response:
+{"state":"success"}
+```
+
+#### 获得所有用户
+api: **/api/user/all**
+
+```
+getbody:
+response:[
+             {
+                 "userid": 1,
+                 "username": "langman1",
+                 "phone": "10086",
+                 "sex": "男",
+                 "name": "泰罗奥特曼",
+                 "authority": "ROLE",
+                 "money": 0
+             },
+             {
+                 "userid": 2,
+                 "username": "langman2",
+                 "phone": "10086",
+                 "sex": "男",
+                 "name": "迪迦奥特曼",
+                 "authority": "ROLE",
+                 "money": 0
+             },
+             {
+                 "userid": 3,
+                 "username": "langman3",
+                 "phone": "10086",
+                 "sex": "男",
+                 "name": "赛文奥特曼",
+                 "authority": "ROLE",
+                 "money": 0
+             }
+         ]
+```
+
+#### 删除某个用户
+
+api :**/api/user/delete/{id}** method:delete
+return {state:success}
+
+### book
+
+#### 创建新的book
+api:**/api/book/create**
+```
+postbody:
+{
+	"solder":3,
+	"cost":89,
+	"normalcost":100,
+	"title":"苏轼文化",
+	"description":"谁学谁秃",
+	"image":"/user/local/images/2",
+	"taglist":["文学系","教科书"]
+    
+    response:
+    {"state":"success"}
+}
+```
+
+#### 获得所有的书籍列表
+api:**/api/book/create**
+```
+method = get
+response
+[
+    {
+        "bookid": 1,
+        "cost": 89,
+        "normalcost": 100,
+        "title": "苏轼文化",
+        "description": "谁学谁秃",
+        "soldenable": false,
+        "image": "/user/local/images/2"
+    }
+]
+```
+
+#### 获取某个用户上传的书
+api:**/api/book/user/{userid}**
+method = get
+```
+response:
+[
+    {
+        "bookid": 1,
+        "cost": 89,
+        "normalcost": 100,
+        "title": "苏轼文化",
+        "description": "谁学谁秃",
+        "soldenable": false,
+        "image": "/user/local/images/2"
+    }
+]
+```
+
+#### 获取某个tag的书籍列表
+api:**/api/book/tag/{tagid}**
+method = get
+```
+response:
+[
+    {
+        "bookid": 1,
+        "cost": 89,
+        "normalcost": 100,
+        "title": "苏轼文化",
+        "description": "谁学谁秃",
+        "soldenable": false,
+        "image": "/user/local/images/2"
+    }
+]
+```
+
+#### 获取书籍具体的信息
+api = **/api/book/{bookid}**
+method = get
+```
+response:
+{
+    "bookid": 1,
+    "cost": 89,
+    "normalcost": 100,
+    "title": "苏轼文化",
+    "description": "谁学谁秃",
+    "image": "/user/local/images/2",
+    "user": {
+        "userid": 3,
+        "phone": "10086",
+        "sex": "男",
+        "name": "赛文奥特曼"
+    },
+    "tagList": [
+        {
+            "tagid": 1,
+            "tagname": "文学系"
+        },
+        {
+            "tagid": 2,
+            "tagname": "教科书"
+        }
+    ]
+}
+```
+
+#### 书籍查询，基于tag加keyword tag必须是精确的
+api = **/api/book/search**
+method:get
+```
+getbody:
+{
+	"tagname":"",
+	"keyword":"java"
+}
+response:
+[
+    {
+        "bookid": 1,
+        "cost": 89,
+        "normalcost": 100,
+        "title": "苏轼文化",
+        "description": "谁学谁秃",
+        "soldenable": false,
+        "image": "/user/local/images/2"
+    }
+]
+```
+
+### 地址
+
+#### 创建某人的一个地址
+api:**/api/user/address/create**
+```
+postbody
+{
+	"userid":"1",
+	"zipcode":"242500",
+	"addressdetail":"安徽泾县"
+}
+response:
+{"state":"success"}
+```
+
+#### 查询某个人的地址
+api:**/api/user/address/{userid}**
+method=get
+```
+response:
+[
+    {
+        "addid": 1,
+        "zipcode": "242500",
+        "addressdetail": "安徽泾县"
+    }
+]
+```
+
+### 充钱方面的
+
+#### 创建新的记录
+api:**/api/money/create**
+```
+postbody:
+{
+	"money":100,
+	"username":"langman1"
+}
+response
+{"state":"success"}
+```
+
+#### 获取记录
+api:**/api/money/{userid}**
+```
+get:
+response:
+[
+    {
+        "id": 1,
+        "money": 100,
+        "date": "2019-05-27 23:21:39"
+    }
+]
+```
+
+### 购物车的功能
+
+#### 添加购物车
+api:**/api/shop/create**
+```
+postbody:
+{
+	"bookid":1,
+	"userid":1
+}
+response
+{"state":"success"}
+```
+
+#### 获取某人的购物车记录
+api: **/api/shop/user/{userid}**
+```
+get
+response
+[
+    {
+        "shopid": 1,
+        "bookid": 0, //这个不用管
+        "userid": 0, //不用管
+        "date": "2019-05-27 23:30:40",
+        "solderid": 3,
+        "book": {
+            "bookid": 1,
+            "cost": 89,
+            "normalcost": 100,
+            "title": "苏轼文化",
+            "description": "谁学谁秃",
+            "soldenable": false,
+            "image": "/user/local/images/2"
+        }
+    }
+]
+```
+
+#### 删除某个物车记录
+api:**/api/shop/delete/{shopid}**
+```
+delete:
+response:
+```
+
+### 交易的模块
+
+#### 创建交易
+api:**/api/record/create**
+
+逻辑是这样的，产生交易 ，买家扣钱，卖家钱不到账，
+买家确认，钱到卖家手中。
+```
+postbody
+{
+	"bookid":1,
+	"address":"安徽泾县",
+	"bookcost":89,
+	"buyid":2,
+	"solderid":3
+}
+response: 这些类型
+{
+    "state": "error",
+    "info": "钱不够啊"
+}
+{
+    "state": "error",
+    "info": "不能买自己的书"
+}
+{"state":"success"}
+
+```
+
+#### 确认订单
+api:**/api/record/sure**
+买家确定订单，或者到达一定的时间，自动会将买家的钱打入进卖家的手中
+```
+postbody:
+{
+	"reid":1,
+	"bookid":1,
+	"buyid":1,
+	"solderid":3
+}
+response:
+{"state":"success"}
+{"state":"error","response":"已经确认过订单了"}
+```
+
+#### 作为买家获得所有订单信息
+api:**/api/record/asbuyer/{userid}**
+method:get
+```
+get:
+response:
+[
+    {
+        "reid": 1,
+        "bookid": 1,
+        "address": "安徽泾县",
+        "bookcost": 89,
+        "forsure": true,
+        "date": "2019-05-27 23:40:35",
+        "user": {
+            "userid": 1,
+            "phone": "10086",
+            "sex": "男",
+            "name": "泰罗奥特曼"
+        },
+        "solder": {
+            "userid": 3,
+            "phone": "10086",
+            "sex": "男",
+            "name": "赛文奥特曼"
+        }
+    }
+]
+```
+
+#### 作为卖家
+api:**/api/record/assolder/{id}**
+method:get
+```
+response:
+[
+    {
+        "reid": 1,
+        "bookid": 1,
+        "address": "安徽泾县",
+        "bookcost": 89,
+        "forsure": true,
+        "date": "2019-05-27 23:40:35",
+        "user": {
+            "userid": 1,
+            "phone": "10086",
+            "sex": "男",
+            "name": "泰罗奥特曼"
+        },
+        "solder": {
+            "userid": 3,
+            "phone": "10086",
+            "sex": "男",
+            "name": "赛文奥特曼"
+        }
+    }
+]
+```
