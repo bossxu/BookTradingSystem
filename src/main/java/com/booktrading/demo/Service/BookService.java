@@ -16,4 +16,6 @@ public interface BookService {
 
     Book getbookdetail(int id);
 
+    List<Book> BookGetRecommd(int userid);
+
 }
