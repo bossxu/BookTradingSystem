@@ -14,5 +14,5 @@ public interface TagService {
 
     public String deleteTag(int tagid);
 
-    public List<Book> GetbooksbyTag(int tagid);
+    public List<Book> GetbooksbyTag(TagDto tagDto);
 }

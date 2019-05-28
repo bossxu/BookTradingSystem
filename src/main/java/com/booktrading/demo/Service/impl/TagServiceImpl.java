@@ -44,7 +44,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Book> GetbooksbyTag(int tagid) {
-        return tagReponsitory.findById(tagid).get().getBookList();
+    public List<Book> GetbooksbyTag(TagDto tagDto) {
+
+        return tagReponsitory.findByTagname(tagDto.getTagname()).getBookList();
     }
 }

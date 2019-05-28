@@ -4,6 +4,7 @@ package com.booktrading.demo.Controller;
 import com.booktrading.demo.Dto.BookDto;
 import com.booktrading.demo.Dto.BookQueryDto;
 import com.booktrading.demo.Dto.BookdetailDto;
+import com.booktrading.demo.Dto.TagDto;
 import com.booktrading.demo.Model.Book;
 import com.booktrading.demo.Service.BookService;
 import com.booktrading.demo.Service.TagService;
@@ -48,10 +49,10 @@ public class BookControl {
         return bookService.CreateNewBook(bookDto);
     }
 
-    @GetMapping("/tag/{id}")
-    public List<Book> Getallboosbytag(@PathVariable int id)
+    @PostMapping("/bytag")
+    public List<Book> Getallboosbytag(@RequestBody TagDto tagDto)
     {
-        return tagService.GetbooksbyTag(id);
+        return tagService.GetbooksbyTag(tagDto);
     }
 
     @GetMapping("/user/{id}")
