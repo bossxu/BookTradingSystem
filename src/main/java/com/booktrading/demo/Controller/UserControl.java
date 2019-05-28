@@ -56,4 +56,9 @@ public class UserControl {
         userService.DeleteUserbyid(id);
         return "{\"state\":\"success\"}";
     }
+    @GetMapping("{id}")
+    public User GetOneUserdetail(@PathVariable int id)
+    {
+        return userService.GetuserByid(id);
+    }
 }

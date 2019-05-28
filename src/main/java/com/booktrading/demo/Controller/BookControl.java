@@ -66,4 +66,9 @@ public class BookControl {
     {
         return bookService.GetBooksbuSearch(bookQueryDto);
     }
+    @GetMapping("/recomd/{id}")
+    public List<Book> GetRecomdbooks(@PathVariable int id)
+    {
+        return bookService.BookGetRecommd(id);
+    }
 }

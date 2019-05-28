@@ -6,9 +6,11 @@ import com.booktrading.demo.Dao.UserReponsitory;
 import com.booktrading.demo.Dto.BookDto;
 import com.booktrading.demo.Dto.BookQueryDto;
 import com.booktrading.demo.Model.Book;
+import com.booktrading.demo.Model.Record;
 import com.booktrading.demo.Model.Tag;
 import com.booktrading.demo.Model.User;
 import com.booktrading.demo.Service.BookService;
+import com.booktrading.demo.util.RecomdAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,9 @@ public class BookServiceImpl implements BookService {
         Iterator<Book> it = bookReponsitory.findAll().iterator();
         while(it.hasNext())
         {
-            bookList.add(it.next());
+            Book book = it.next();
+            if(!book.isSoldenable())
+                bookList.add(book);
         }
         return bookList;
     }
@@ -89,5 +93,19 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getbookdetail(int id) {
         return bookReponsitory.findById(id).get();
+    }
+
+    @Override
+    public List<Book> BookGetRecommd(int userid) {
+        List<Book> books = GetallBook();
+        RecomdAlgorithm recomdAlgorithm = new RecomdAlgorithm();
+        List<Integer> bookids =  recomdAlgorithm.AlgorithmRecommd(books);
+        books.clear();
+        Iterator<Integer> it = bookids.listIterator();
+        while(it.hasNext())
+        {
+            books.add(bookReponsitory.findById(it.next()).get());
+        }
+        return books;
     }
 }
