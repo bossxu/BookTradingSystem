@@ -53,6 +53,7 @@ date: 2019-5-9 12:10
 |addid|int||
 |zipcode|string|邮政编码|
 |addressdetail|string|地址细节|
+|userid|int|外键|
 
 ### book表
 
@@ -66,6 +67,7 @@ date: 2019-5-9 12:10
 |description|string|简介|
 |soldenable|boolen|就是是否卖出去了|
 |image|string|书皮|
+|userid|所有者|外键|
 
 ### tags表
 
