@@ -61,7 +61,7 @@ public class BookControl {
         return userService.GetAllbooksbuy(id);
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public List<Book> Getbooksbusearch(@RequestBody BookQueryDto bookQueryDto)
     {
         return bookService.GetBooksbuSearch(bookQueryDto);

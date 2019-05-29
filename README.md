@@ -41,13 +41,8 @@ date: 2019-5-9 12:10
 |phone|string||
 |name|string||
 |authority|string|admin or roleuser|
-
-### money表
-
-|key|type|description|
-|---|---|---|
-|userid|int|用户标识|
-|money|int|用户账上的钱|
+|sex|string||
+|money|double||
 
 ### address表
 
@@ -55,21 +50,22 @@ date: 2019-5-9 12:10
 
 |key|type|description|
 |---|---|---|
-|userid|int||
-|address|string||
+|addid|int||
+|zipcode|string|邮政编码|
+|addressdetail|string|地址细节|
 
 ### book表
 
 |key|type|description|
 |---|---|---|
-|bookid|int||
+|bookid|int|自增长|
 |solder|int|userid|
 |cost|float|价格为多少|
 |normalcost|float|原价为多少|
 |title|string||
 |description|string|简介|
 |soldenable|boolen|就是是否卖出去了|
-|image|string|一个url|
+|image|string|书皮|
 
 ### tags表
 
@@ -78,21 +74,15 @@ date: 2019-5-9 12:10
 |tagid|int||
 |tagname|string|tag的名字|
 
-### booktag表
 
-|key|type|description|
-|---|---|---|
-|bookid|int||
-|tagid|int||
-
-### money表
+### moneyRecord表
 
 > 记录充钱与消费记录
 
 |key|type|description|
 |---|---|---|
+|id|int|自增长|
 |userid|int|用户标识|
-|behavior|string|充钱还是消费,recharge , consumption|
 |money|float||
 |date|string|时间|
 
@@ -102,14 +92,24 @@ date: 2019-5-9 12:10
 
 |key|type|description|
 |----|---|---|
+|reid|int|自增长|
 |date|string|时间|
-|buyid|int|每一个标识,自增长|
-|userid|int||
-|bookid|int||
+|userid|int|外键|
+|bookid|int|外键|
+|solderid|int|外键|
 |address|string|用户选的地址|
 |bookcost|float|购买的书籍的价格|
-|booksolderid|int|售书者的id|
-|buyerphone|string|用户的联系方式|
+|forsure|bollean|订单是否确认|
+
+### shopingRecord表
+> 购物车
+
+|key|type|description|
+|---|---|---|
+|shopid|int|主键|
+|date|string|时间|
+|user_id|int|外键|
+|book_id|int|外键|
 
 ## api接口通信规范
 
